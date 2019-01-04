@@ -1,0 +1,26 @@
+body {
+    background-image: url("../images/709674_comic-wallpapers_1920x1080_h.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #000000;   
+    font-family: 'Impact', Helvetica, sans-serif;
+    color: red;
+    ;
+}
+
+button {
+	margin: 15px;
+}
+
+hr {
+    color: red;
+    border-style: solid none;
+    border-width: 1px 0;
+    margin: 15px 0;
+}
+
+.gifsDisplay {
+	float: left;
+	margin: 5px;
+}
