@@ -30,8 +30,15 @@ $(document).ready(function() {
                     var gifDiv = $("<div class='gifsDisplay'>");
                     // Storing the result item's rating
                     var rating = results[i].rating;
-                    // Creating a paragraph tag with the result item's rating
-                    var p = $("<p>").text("Rating: " + rating);
+                    // Storing the result item's title
+                    var title = results[i].title;
+                    // Creating a paragraph tag with the result item's rating and title
+                    var p = $("<p id='gifCaption'>").text("Rating: " + rating + "    Title: " + title);
+                     // Creating a paragraph tag with link to Giphy page
+//                    var bitly_gif_url = results[i].bitly_gif_url;
+//                    var p2 = $("<p><a href='" + bitly_gif_url + "' target='_blank'>View Original</a></p>");
+                    var originalImage = results[i].images.original.url;
+                    var p2 = $("<p><a href='" + originalImage + "' target='_blank'>View Original</a></p>");		
                     // Creating an image tag
                     var heroImage = $("<img>");
                     // Giving the image tag a 'gif' class
@@ -44,6 +51,7 @@ $(document).ready(function() {
                     heroImage.attr("data-state", "still");
                     // Appending the paragraph and heroImage created to the "gifDiv" div we created
                     gifDiv.append(p);
+                    gifDiv.append(p2);
                     gifDiv.append(heroImage);
                     // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
                     $("#gifs-appear-here").prepend(gifDiv);
