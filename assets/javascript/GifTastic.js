@@ -87,6 +87,8 @@ $(document).ready(function() {
             displayButtons();
             // clear new hero text entry field
             $("#addHero").val("");
+        } else {
+            alert("Please enter a hero name");
         };
     });
 
