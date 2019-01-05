@@ -2,6 +2,9 @@ $(document).ready(function() {
     // variables
     var topics = ["Iron Man", "Deadpool", "Aquaman", "Spiderman", "Hellboy"]
     var alreadyUsed = -1;
+    var comicHero = "";
+    var moreBtn = "";
+    var offset = 0;
 
     // display button array on page load
     displayButtons();
@@ -9,17 +12,67 @@ $(document).ready(function() {
     $("#buttons").on("click", ".comicHeros", function() {
         // clear out gifs already displayed
         $("#gifs-appear-here").empty();
-        var comicHero = $(this).attr("data-hero");
-        // debugger;
+        comicHero = $(this).attr("data-hero");
+        getGifs(comicHero, offset);
+        $("#moreButton").empty();
+        moreBtn = $("<button class='btn-outline-danger'>");
+        moreBtn.addClass("moreHeroes");
+        moreBtn.text("Want to See More?");
+        $("#moreButton").append(moreBtn);
+    });
+
+    $("#moreButton").on("click", function() {
+        offset +=10;
+        getGifs(comicHero, offset);
+        });  
+
+    $(document).on("click", ".gif", function() {
+        // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+        var state = $(this).attr("data-state");
+        // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+        // Then, set the image's data-state to animate
+        // Else set src to the data-still value
+        if (state === "still") {
+            $(this).attr("src", $(this).attr("data-animate"));
+            $(this).attr("data-state", "animate");
+        } else {
+            $(this).attr("src", $(this).attr("data-still"));
+            $(this).attr("data-state", "still");
+        };
+    });
+
+    $("#newHeroes").on("click", function() {
+        event.preventDefault();
+        var newHero = $("#addHero").val().trim();
+        // duplicates check
+        if (newHero !== "") {
+            alreadyUsed = topics.indexOf (newHero);
+            if (alreadyUsed == -1) {
+                topics.push(newHero);
+            } else {
+                alert(newHero + " has already been selected");
+            }
+            // redisplay the buttons, including newly added hero
+            displayButtons();
+            // clear new hero text entry field
+            $("#addHero").val("");
+        } else {
+            alert("Please enter a hero name");
+        };
+    });
+
+    function getGifs(comicHero, offset) {
         // ajax call parameters - get image based on value from clicked button
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-            comicHero + "&api_key=I9OLrgjtcwjg6Rgz4T3FC03k9ib5WtSB&limit=10";
+        comicHero + "&api_key=I9OLrgjtcwjg6Rgz4T3FC03k9ib5WtSB&limit=10&offset=" + offset;
+        console.log("queryURL: " + queryURL);
         $.ajax({
             url: queryURL,
             method: "GET"
         })
         // After the data comes back from the API
         .then(function(response) {
+            //console.log(response.data);
             // Storing an array of results in the results variable
             var results = response.data;
             // Looping over every result item
@@ -38,7 +91,7 @@ $(document).ready(function() {
 //                    var bitly_gif_url = results[i].bitly_gif_url;
 //                    var p2 = $("<p><a href='" + bitly_gif_url + "' target='_blank'>View Original</a></p>");
                     var originalImage = results[i].images.original.url;
-                    var p2 = $("<p><a href='" + originalImage + "' target='_blank'>View Original</a></p>");		
+                    var p2 = $("<p><a href='" + originalImage + "' target='_blank'>See on Giphy</a></p>");		
                     // Creating an image tag
                     var heroImage = $("<img>");
                     // Giving the image tag a 'gif' class
@@ -57,51 +110,11 @@ $(document).ready(function() {
                     $("#gifs-appear-here").prepend(gifDiv);
                     }
             }  
-        });     
-    });
+        });  
 
-    $(document).on("click", ".gif", function() {
-        // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
-        var state = $(this).attr("data-state");
-        // debugger;
-        // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-        // Then, set the image's data-state to animate
-        // Else set src to the data-still value
-        if (state === "still") {
-            $(this).attr("src", $(this).attr("data-animate"));
-            $(this).attr("data-state", "animate");
-        } else {
-            $(this).attr("src", $(this).attr("data-still"));
-            $(this).attr("data-state", "still");
-        };
-    });
-
-    $("#newHeroes").on("click", function() {
-        event.preventDefault();
-        var newHero = $("#addHero").val().trim();
-        // debugger;
-        // duplicates check
-        if (newHero !== "") {
-            alreadyUsed = topics.indexOf (newHero);
-            if (alreadyUsed == -1) {
-                topics.push(newHero);
-            } else {
-                alert(newHero + " has already been selected");
-            }
-            // can enable the next instruction if need to clear old gifs when new displayed
-            //$("#gifs-appear-here").empty();   
-
-            // redisplay the buttons, including newly added hero
-            displayButtons();
-            // clear new hero text entry field
-            $("#addHero").val("");
-        } else {
-            alert("Please enter a hero name");
-        };
-    });
+    }
 
     function displayButtons() {
-        // debugger;
         $("#buttons").empty();
         // remove the buttons in the buttons div    
         for (var i = 0; i < topics.length; i++) {
