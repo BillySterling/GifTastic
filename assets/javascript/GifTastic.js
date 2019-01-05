@@ -14,7 +14,10 @@ $(document).ready(function() {
         $("#gifs-appear-here").empty();
         comicHero = $(this).attr("data-hero");
         getGifs(comicHero, offset);
+        // added 'More' button - to display next 10 gifs for same search
+        // clear the 'More' button - prevent multiple display of button
         $("#moreButton").empty();
+        // create 'More' button and set tags
         moreBtn = $("<button class='btn-outline-danger'>");
         moreBtn.addClass("moreHeroes");
         moreBtn.text("Want to See More?");
