@@ -89,8 +89,6 @@ $(document).ready(function() {
                     // Creating a paragraph tag with the result item's rating and title
                     var p = $("<p id='gifCaption'>").text("Rating: " + rating + "    Title: " + title);
                      // Creating a paragraph tag with link to Giphy page
-//                    var bitly_gif_url = results[i].bitly_gif_url;
-//                    var p2 = $("<p><a href='" + bitly_gif_url + "' target='_blank'>View Original</a></p>");
                     var originalImage = results[i].images.original.url;
                     var p2 = $("<p><a href='" + originalImage + "' target='_blank'>See on Giphy</a></p>");		
                     // Creating an image tag
@@ -112,7 +110,6 @@ $(document).ready(function() {
                     }
             }  
         });  
-
     }
 
     function displayButtons() {
@@ -127,4 +124,4 @@ $(document).ready(function() {
             $("#buttons").append(heroBtn);
         }
     };
-})
+});
