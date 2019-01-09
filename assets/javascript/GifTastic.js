@@ -44,11 +44,7 @@ $(document).ready(function() {
         };
     });
 
-    $("#addHero").change(function(event) {
-        // allow click or enter key pressed to submit
-        if (event.keyCode == 13) {
-        $("#newHeroes").trigger("click")
-        }
+    $("#newHeroes").on("click", function() {
         event.preventDefault();
         var newHero = $("#addHero").val().trim();
         // duplicates check
