@@ -44,7 +44,11 @@ $(document).ready(function() {
         };
     });
 
-    $("#newHeroes").on("click", function() {
+    $("#addHero").change(function(event) {
+        // allow click or enter key pressed to submit
+        if (event.keyCode == 13) {
+        $("#newHeroes").trigger("click")
+        }
         event.preventDefault();
         var newHero = $("#addHero").val().trim();
         // duplicates check
@@ -53,14 +57,12 @@ $(document).ready(function() {
             if (alreadyUsed == -1) {
                 topics.push(newHero);
             } else {
-                alert(newHero + " has already been selected");
+                $("#dupModal").modal()
             }
             // redisplay the buttons, including newly added hero
             displayButtons();
             // clear new hero text entry field
             $("#addHero").val("");
-        } else {
-            alert("Please enter a hero name");
         };
     });
 
