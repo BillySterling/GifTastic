@@ -44,6 +44,13 @@ $(document).ready(function() {
         };
     });
 
+    // added thie following (from StackOverflow search) - when enter key pressed causes "Submit" click event
+    $("#addHero").keyup(function(event) {
+        if (event.keyCode === 13) {
+            $("#newHeroes").click();
+        }
+    });
+
     $("#newHeroes").on("click", function() {
         event.preventDefault();
         var newHero = $("#addHero").val().trim();
