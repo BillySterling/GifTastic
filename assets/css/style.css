@@ -1,12 +1,11 @@
 body {
     background-image: url("../images/709674_comic-wallpapers_1920x1080_h.jpg");
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    /*background-attachment: fixed; */
     background-size: cover;
     background-color: #000000;   
     font-family: 'Impact', Helvetica, sans-serif;
     color: red;
-    ;
 }
 
 a {
@@ -23,6 +22,14 @@ a:hover
 
 button {
 	margin: 15px;
+}
+
+footer {
+    height: auto;
+    color: red;
+    font-size: 12px;
+    font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+    text-decoration: none;
 }
 
 hr {
