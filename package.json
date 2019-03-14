@@ -1,0 +1,27 @@
+{
+  "name": "giftastic",
+  "version": "1.0.0",
+  "description": "Comic Book Superhero gif Search",
+  "main": "GifTastic.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BillySterling/GifTastic.git"
+  },
+  "keywords": [
+    "JavaScript",
+    "jQuery",
+    "AJAX"
+  ],
+  "author": "Billy Sterling",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BillySterling/GifTastic/issues"
+  },
+  "homepage": "https://github.com/BillySterling/GifTastic#readme",
+  "devDependencies": {
+    "eslint": "^5.15.1"
+  }
+}

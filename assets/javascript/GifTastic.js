@@ -1,3 +1,4 @@
+/*eslint-env jquery*/
 $(document).ready(function() {
     // variables
     var topics = ["Iron Man", "Deadpool", "Aquaman", "Spiderman", "Hellboy"]
@@ -41,7 +42,7 @@ $(document).ready(function() {
         } else {
             $(this).attr("src", $(this).attr("data-still"));
             $(this).attr("data-state", "still");
-        };
+        }
     });
 
     // added thie following (from StackOverflow search) - when enter key pressed causes "Submit" click event
@@ -66,14 +67,13 @@ $(document).ready(function() {
             displayButtons();
             // clear new hero text entry field
             $("#addHero").val("");
-        };
+        }
     });
 
     function getGifs(comicHero, offset) {
         // ajax call parameters - get image based on value from clicked button
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
         comicHero + "&api_key=I9OLrgjtcwjg6Rgz4T3FC03k9ib5WtSB&limit=10&offset=" + offset;
-        console.log("queryURL: " + queryURL);
         $.ajax({
             url: queryURL,
             method: "GET"
@@ -130,5 +130,5 @@ $(document).ready(function() {
             heroBtn.text(topics[i]);
             $("#buttons").append(heroBtn);
         }
-    };
+    }
 });
